@@ -40,7 +40,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = 'black';
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили', TEXT_GAME_X, TEXT_GAME_Y);
-  ctx.fillText('Список результатов', TEXT_GAME_X - GAP, TEXT_CLOUD_Y);
+  ctx.fillText('Список результатов:', TEXT_GAME_X - GAP, TEXT_CLOUD_Y);
 
   for (var i = 0; i < names.length; i++) {
     /* выводим статистику игроков имена и время*/
