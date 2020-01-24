@@ -7,10 +7,10 @@ var CLOUD_Y = 10;
 var GAP = 10;
 var NAME_Y = 270;
 var BAR_HEIGHT = 150;
-var DISTANCE = 50;
+var DISTANCE = 90;
 var BAR_WIDTH = 40;
 var BAR_Y = 110;
-var TEXT_GAME_X = 200;
+var TEXT_GAME_X = 150;
 var TEXT_GAME_Y = 25;
 var TEXT_CLOUD_Y = 40;
 
@@ -44,8 +44,8 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
     /* выводим статистику игроков имена и время*/
-    ctx.fillText(names[i], CLOUD_X + DISTANCE + DISTANCE * i, NAME_Y);
-    ctx.fillText(Math.floor(times[i]), CLOUD_X + DISTANCE + DISTANCE * i, BAR_Y - DISTANCE + GAP);
+    ctx.fillText(names[i], CLOUD_X - BAR_WIDTH + DISTANCE + DISTANCE * i, NAME_Y);
+    ctx.fillText(Math.floor(times[i]), CLOUD_X - BAR_WIDTH + DISTANCE + DISTANCE * i, BAR_Y - GAP - CLOUD_Y);
     /* условие подбора цвета */
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
@@ -53,7 +53,7 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = 'hsl(240,' + Math.floor(Math.random() * (100 + 1)) + '%, 50%)';
     }
     /* отрисовка самих блочков */
-    ctx.fillRect(CLOUD_X + DISTANCE + DISTANCE * i, NAME_Y - DISTANCE + GAP - (BAR_HEIGHT * times[i]) / maxTime, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
+    ctx.fillRect(CLOUD_X - BAR_WIDTH + DISTANCE + DISTANCE * i, NAME_Y - GAP - CLOUD_Y - (BAR_HEIGHT * times[i]) / maxTime, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
     ctx.fillStyle = 'black';
   }
 };
