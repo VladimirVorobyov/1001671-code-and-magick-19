@@ -1,25 +1,25 @@
 'use strict';
-
-var CLOUD_WIDTH = 270;
-var CLOUD_HEIGHT = 420;
+// этот код работает в современном режиме
+var CLOUD_WIDTH = 420;
+var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
-var NAME_Y = 290;
+var NAME_Y = 270;
 var BAR_HEIGHT = 150;
 var DISTANCE = 50;
 var BAR_WIDTH = 40;
 var BAR_Y = 110;
-var TEXT_GAME_X = 150;
+var TEXT_GAME_X = 200;
 var TEXT_GAME_Y = 25;
 var TEXT_CLOUD_Y = 40;
 
-
+/* чтобы не повторять код по 100 раз делаем шаблон для отрисовки канвас */
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
-
+/* для нахождения макс значения */
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
   for (var i = 1; i < arr.length; i++) {
@@ -31,27 +31,29 @@ var getMaxElement = function (arr) {
 };
 
 
-window.renderStatistics = function (ctx, players, times) {
+window.renderStatistics = function (ctx, names, times) {
+
   var maxTime = getMaxElement(times);
 
-  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
-  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
+  renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)'); /* отрисовка блоков цень */
+  renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff'); /* отрисовка основы блока*/
   ctx.fillStyle = 'black';
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили', TEXT_GAME_X, TEXT_GAME_Y);
   ctx.fillText('Список результатов', TEXT_GAME_X - GAP, TEXT_CLOUD_Y);
 
-  for (var i = 0; i < players.length; i++) {
-    ctx.fillText(players[i], CLOUD_X + GAP + DISTANCE * i, NAME_Y);
-    ctx.fillText(Math.floor(times[i]), CLOUD_X + GAP + DISTANCE * i, BAR_Y - DISTANCE + GAP);
-
-    if (players[i] === 'Вы') {
-      ctx.fillStyle = 'red';
+  for (var i = 0; i < names.length; i++) {
+    /* выводим статистику игроков имена и время*/
+    ctx.fillText(names[i], CLOUD_X + DISTANCE + DISTANCE * i, NAME_Y);
+    ctx.fillText(Math.floor(times[i]), CLOUD_X + DISTANCE + DISTANCE * i, BAR_Y - DISTANCE + GAP);
+    /* условие подбора цвета */
+    if (names[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'hsl(240,' + Math.floor(Math.random() * (100 + 1)) + '%, 50%)';
     }
-
-    ctx.fillRect(CLOUD_X + GAP + DISTANCE * i, NAME_Y - DISTANCE - (BAR_HEIGHT * times[i]) / maxTime, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
+    /* отрисовка самих блочков */
+    ctx.fillRect(CLOUD_X + DISTANCE + DISTANCE * i, NAME_Y - DISTANCE + GAP - (BAR_HEIGHT * times[i]) / maxTime, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
     ctx.fillStyle = 'black';
   }
 };
