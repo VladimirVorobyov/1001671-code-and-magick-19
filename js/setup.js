@@ -34,8 +34,8 @@ var drawingMagicians = function () {
   for (var i = 0; i < NUMBER_MAGICIAN; i++) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
     wizardElement.querySelector('.setup-similar-label').textContent = getUserName(NICKNAMES, SURNAMES);
-    wizardElement.querySelector('.wizard-coat').style.fill = getArrayColors(COLORS_MANTLE);
-    wizardElement.querySelector('.wizard-eyes').style.fill = getArrayColors(COLOR_EYES);
+    wizardElement.querySelector('.wizard-coat').style.fill = getCoatEyesColors(COLORS_MANTLE);
+    wizardElement.querySelector('.wizard-eyes').style.fill = getCoatEyesColors(COLOR_EYES);
     fragment.appendChild(wizardElement);
   }
   return similarListElement.appendChild(fragment);
