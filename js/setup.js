@@ -42,3 +42,80 @@ var drawingMagicians = function () {
 };
 
 drawingMagicians();
+
+var closeDialog = usersDialog.querySelector('.setup-close');
+var onCloseDialogClick = function () {
+  usersDialog.classList.add('hidden');
+};
+
+// закрытие по клику
+closeDialog.addEventListener('click', onCloseDialogClick);
+// закрыте по кнопке
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    onCloseDialogClick();
+  }
+});
+// закрыть по enter
+closeDialog.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    onCloseDialogClick();
+  }
+});
+
+// открытие по клику
+var usersDialogAvatar = document.querySelector('.setup-open');
+
+var onUsersDialogAvatarClick = function () {
+  usersDialog.classList.remove('hidden');
+};
+
+usersDialogAvatar.addEventListener('click', onUsersDialogAvatarClick);
+// открытие по кнопке
+var userDialogImg = usersDialogAvatar.querySelector('.setup-open-icon');
+userDialogImg.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Enter') {
+    onUsersDialogAvatarClick();
+  }
+});
+// валидация имени игрока
+var setupUserName = usersDialog.querySelector('.setup-user-name');
+var onUserNameInvalid = function () {
+  if (setupUserName.validity.valueMissing) {
+    setupUserName.setCustomValidity('Обязательное поле');
+  } else if (setupUserName.validity.tooShort) {
+    setupUserName.setCustomValidity('имя персонажа не может содержать менее 2 символов');
+  } else if (setupUserName.validity.tooLong) {
+    setupUserName.setCustomValidity('максимальная длина имени персонажа — 25 символов');
+  } else {
+    setupUserName.setCustomValidity('');
+  }
+};
+
+setupUserName.addEventListener('invalid', onUserNameInvalid);
+
+
+// изменение мантии
+var wizardCoat = document.querySelector('.setup-wizard .wizard-coat');
+var coatInputs = document.querySelector('input[name="coat-color"]');
+wizardCoat.addEventListener('click', function () {
+  wizardCoat.style.fill = getCoatEyesColors(COLORS_MANTLE);
+  coatInputs.value = wizardCoat.style.fill;
+});
+
+// цвет глаз
+var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
+var eyesInputs = document.querySelector('input[name="eyes-color"]');
+wizardEyes.addEventListener('click', function () {
+  wizardEyes.style.fill = getCoatEyesColors(COLOR_EYES);
+  eyesInputs.value = wizardEyes.style.fill;
+});
+
+// цвет огня
+var COLARS_FIREBALL = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var fireballWrap = document.querySelector('.setup-fireball-wrap');
+var fireballInputs = document.querySelector('input[name="fireball-color"]');
+fireballWrap.addEventListener('click', function () {
+  fireballWrap.style.background = getCoatEyesColors(COLARS_FIREBALL);
+  fireballInputs.value = fireballWrap.style.background;
+});
