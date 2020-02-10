@@ -119,3 +119,4 @@ fireballWrap.addEventListener('click', function () {
   fireballWrap.style.background = getCoatEyesColors(COLARS_FIREBALL);
   fireballInputs.value = fireballWrap.style.background;
 });
+// не пойму почему все работает а форма пишет ошибку
