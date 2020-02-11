@@ -12,6 +12,11 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .querySelector('.setup-similar-item');
 var fragment = document.createDocumentFragment();
 
+var COLARS_FIREBALL = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
+var fireballWrap = document.querySelector('.setup-fireball-wrap');
+var fireballInputs = document.querySelector('input[name="fireball-color"]');
+var CLOSE_KEY = 'Escap';
+var OPEN_KEY = 'Enter';
 /* функция для рандомного создания фамилии и имени */
 var getUserName = function (name, givenName) {
   var randomName = name[Math.floor(Math.random() * name.length)];
@@ -52,13 +57,13 @@ var onCloseDialogClick = function () {
 closeDialog.addEventListener('click', onCloseDialogClick);
 // закрыте по кнопке
 document.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Escape') {
+  if (evt.key === CLOSE_KEY) {
     onCloseDialogClick();
   }
 });
 // закрыть по enter
 closeDialog.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
+  if (evt.key === OPEN_KEY) {
     onCloseDialogClick();
   }
 });
@@ -74,7 +79,7 @@ usersDialogAvatar.addEventListener('click', onUsersDialogAvatarClick);
 // открытие по кнопке
 var userDialogImg = usersDialogAvatar.querySelector('.setup-open-icon');
 userDialogImg.addEventListener('keydown', function (evt) {
-  if (evt.key === 'Enter') {
+  if (evt.key === 'OPEN_KEY') {
     onUsersDialogAvatarClick();
   }
 });
@@ -112,9 +117,6 @@ wizardEyes.addEventListener('click', function () {
 });
 
 // цвет огня
-var COLARS_FIREBALL = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
-var fireballWrap = document.querySelector('.setup-fireball-wrap');
-var fireballInputs = document.querySelector('input[name="fireball-color"]');
 fireballWrap.addEventListener('click', function () {
   fireballWrap.style.background = getCoatEyesColors(COLARS_FIREBALL);
   fireballInputs.value = fireballWrap.style.background;
